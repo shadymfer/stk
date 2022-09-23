@@ -14,7 +14,7 @@ const Utilities = () => {
         <h1 className='text-white mb-5 mt-20  text-center'>Utilities</h1>
         <div className='grid md:grid-cols-2 gap-12 sm:gap-8'>
                 
-                <Link href="/bulktransfer">
+                <Link href="/toolkit">
                 <div className='cursor-pointer text-center relative text-white flex items-center justify-center h-auto w-full shadow-md rounded-xl shadow-red-600 flex-col '>
                     <div className=' shadow-red-600 flex items-center justify-center shrink-0 grow-0 rounded-full shadow-lg  cursor-pointer hover:scale-110 ease-in duration-300'>
                         <Image className='' src={TransferImg} alt='' height={100} width={100}/>
