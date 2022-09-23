@@ -88,7 +88,7 @@ function test(){
             { connected && (<> { allowed ? 
               <div>
               <h1 className='text-sm text-green-500 '>You are a verified holder! Your support will help us build more fun stuff in Solana. 🔥 ✅</h1>
-              <a href='/toolkit/dashboard' ><button className=' w-lg sm:w-auto md:items-center text-xl p-4 text-gray-100 mt-4 '>Enter Dashboard</button> </a>
+              <Link href='/toolkit/dashboard' ><button className=' w-lg sm:w-auto md:items-center text-xl p-4 text-gray-100 mt-4 '>Enter Dashboard</button> </Link>
             </div>
             : 
             <a href="https://magiceden.io/marketplace/tshc">
