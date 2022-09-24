@@ -5,9 +5,16 @@ import solIMG from '../../public/assets/solanaLogo.png'
 const ShadySpanner = () => {
   return (
     <div>
-      <div className='h-[128px] bg-slate-900/50 grid grid-cols-2 gap-5 items-center mb-16 mt-8 p-10 sm:p-32 sm:mb-64 sm:mt-64 md:gap-32'>
-        <Image className='' src={meIMG} ></Image>
-        <Image className='' src={solIMG} ></Image>
+      <div className='h-[128px] md:h-[256px] bg-slate-900/50 grid grid-cols-4 gap-4 justify-center items-center mb-16 mt-16 md:mb-64 md:gap-32'>
+       
+        <div className='col-span-2 m-1 md:m-10 '>
+            <Image  src={meIMG} ></Image>
+          </div>
+         
+          <div className='col-span-2 m-5 md:m-10 '>
+            <Image src={solIMG} ></Image>
+          </div>
+       
       </div>
     </div>
   )
