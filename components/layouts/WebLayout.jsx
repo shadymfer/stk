@@ -3,7 +3,8 @@ import Hero from '../website/Hero'
 import Utilities from '../website/Utilities'
 import NavBar from '../website/NavBar'
 import Footer from '../website/Footer'
-
+import ShadySpanner from '../website/ShadySpanner';
+import ShadyGrid from '../website/ShadyGrid';
 
 
 const PrimaryLayout = ({
@@ -22,7 +23,9 @@ const PrimaryLayout = ({
     <div className="bg-gradient-to-bl h-full w-full from-[#c31432] to-[#240b36]">
       <NavBar />
       <Hero />
+      <ShadySpanner />
       <Utilities />
+      <ShadyGrid />
       <Footer />
       </div>
     </>
