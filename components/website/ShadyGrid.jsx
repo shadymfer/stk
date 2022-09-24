@@ -14,7 +14,7 @@ const ShadyGrid = () => {
   return (<>
     <div className='mt-20 text-white'>
       <h1 className='p-5 text-center'>Meet The Shadies</h1>
-      <p className='p-5 mr-[20.5rem] ml-[20.5rem]  text-center'>
+      <p className=' p-10 text-center'>
       The Shady Class (Hikage No Kurasu) Web3 Chibis in the Solana network. 
       3,330 chibified avatars ready to take on the metaverse and save the decentralization movement. Launchpad. Web3 tools and more..
       </p>
