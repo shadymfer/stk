@@ -6,6 +6,9 @@ import { FaDiscord } from 'react-icons/fa';
 import { TbArrowBackUp } from 'react-icons/tb';
 import logo from '../../public/assets/newth.ico'
 import Image from 'next/image';
+import Link from 'next/link';
+
+
 
 const Login = ({ providers }) => {
 
@@ -25,11 +28,13 @@ const Login = ({ providers }) => {
                   <FaDiscord className='mr-2'> </FaDiscord> <p className='font-bold'>Login with Discord</p>
               </button>
           </div> 
+          <Link href='/'>
           <div className='items-center' >
               <button className='text-white flex flex-row  justify-center items-center rounded-md uppercase bg-gradient-to-bl from-[#c31432] to-[#240b36] w-64 text-center h-12'> 
-                  <TbArrowBackUp className='mr-2'> </TbArrowBackUp> <p className=''>Go Back to Main Site</p>
-              </button>
-          </div> 
+                  <TbArrowBackUp className='mr-2'> </TbArrowBackUp><p className=''>Go Back to Main Site</p> 
+              </button> 
+          </div>
+          </Link>
         </div>
         
        
