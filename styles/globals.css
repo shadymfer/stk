@@ -31,7 +31,7 @@ html{
   }
 }
 .custom-img {
-  background-image: url('../public/assets/ky.jpg')
+  background-image: url('../public/assets/newbgsh.png')
 }
 
 .toolkit-global{
@@ -45,3 +45,4 @@ html{
 button{
   @apply rounded-xl uppercase bg-[#eb920c] 
 }
+

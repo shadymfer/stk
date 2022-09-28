@@ -24,7 +24,9 @@ import { ToastContainer } from 'react-toastify'
 import '../styles/globals.css'
 require('@solana/wallet-adapter-react-ui/styles.css');
 
-function MyApp({ Component, pageProps }) {
+import {SessionProvider} from 'next-auth/react'
+
+function MyApp({ Component, pageProps,session }) {
 
   const router = useRouter()
 
@@ -50,16 +52,21 @@ function MyApp({ Component, pageProps }) {
     [network]
 );
 
-  return <>
-  <ConnectionProvider endpoint={endpoint}>
+
+/**
+ *   <ConnectionProvider endpoint={endpoint}>
       <WalletProvider wallets={wallets} autoConnect>
           <WalletModalProvider>
           <ToastContainer/>
-          
-              <Component {...pageProps} />
           </WalletModalProvider>
       </WalletProvider>
   </ConnectionProvider>
+ */
+  return <>
+
+          <SessionProvider session={session} >
+              <Component {...pageProps} />
+          </SessionProvider>
 
  
  

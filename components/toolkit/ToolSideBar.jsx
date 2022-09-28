@@ -2,7 +2,13 @@ import React from 'react'
 
 const ToolSideBar = () => {
   return (
-    <div>ToolSideBar</div>
+    <div className='max-w-[270px] h-full bg-[#09101B]'>
+      <div>
+        <div>
+
+        </div>
+      </div>
+    </div>
   )
 }
 

@@ -7,7 +7,7 @@ import ShadySpanner from '../website/ShadySpanner';
 import ShadyGrid from '../website/ShadyGrid';
 
 
-const PrimaryLayout = ({
+const WebsiteLayout = ({
   children,
   justify = 'items-center',
   ...divProps
@@ -32,4 +32,4 @@ const PrimaryLayout = ({
   );
 };
 
-export default PrimaryLayout;
+export default WebsiteLayout;

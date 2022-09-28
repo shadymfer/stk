@@ -67,7 +67,7 @@ const Toolkit = () => {
     })
   }, [nfts])
 
-function test(){
+/*function test(){
   if(connected && allowed){
     return {
       redirect: {
@@ -76,7 +76,7 @@ function test(){
       },
     };
   }
-}
+}*/
 
   return (
     
