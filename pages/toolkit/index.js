@@ -14,10 +14,7 @@ const {data: session, status} = useSession();
   if(session){
     return (
       <>
-        <p> You are signed in</p>
-        <button onClick={() => signOut()}  className='text-white flex flex-row  justify-center items-center rounded-md uppercase bg-[#5865F2] h-[50px] w-64 text-center'> 
-                  <FaDiscord className='mr-2'> </FaDiscord> <p className=''>Logout</p>
-        </button>
+        {console.log(session)}
         <ToolkitLayout />     
         
       </>
