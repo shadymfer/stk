@@ -3,7 +3,7 @@ import {useSession, signIn, signOut} from 'next-auth/react'
 //import { providers, signIn, getSession, csrfToken } from "next-auth/client";
 
 import { FaDiscord } from 'react-icons/fa';
-import discordImg from '../../public/assets/discordlogo.png'
+import logo from '../../public/assets/newth.ico'
 import Image from 'next/image';
 
 const Login = ({ providers }) => {
@@ -11,20 +11,22 @@ const Login = ({ providers }) => {
     const {data:session} = useSession();
     if(!session){
         return (
-        <>
-        <div className='h-screen w-full flex flex-col justify-center items-start p-24 custom-img border border-r-red-700 '>
-          <div className='grid grid-row-3'>
+        
+        <div className='h-screen w-full flex flex-col justify-center items-center text-center bg-gradient-to-bl from-[#c31432] to-[#240b36] text-white '>
+          
+          <div className='mt-[-200px] '>
+          <Image src={logo} height={400} width={400}></Image>
             <h1>Welcome to the Shady Class Toolkit</h1>
-            <p>Please sign in with your Discord</p>
+            <p className='pt-4'>Please sign in with your Discord</p>
           </div>
-          <div className='items-center' >
+          <div className='items-center p-5' >
               <button onClick={() => signIn('discord')}  className='text-white flex flex-row  justify-center items-center rounded-md uppercase bg-[#5865F2] h-[50px] w-64 text-center'> 
                   <FaDiscord className='mr-2'> </FaDiscord> <p className=''>Login with Discord</p>
               </button>
           </div> 
         </div>
         
-        </>
+       
       )
     }   
     
