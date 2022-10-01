@@ -4,10 +4,10 @@ import {useSession, signOut, getSession} from 'next-auth/react'
 import ToolkitLayout from '../../components/layouts/ToolkitLayout'
 import { FaDiscord } from 'react-icons/fa';
 import WebsiteLayout from '../../components/layouts/WebLayout';
+import ToolSideBar from '../../components/toolkit/ToolSideBar';
 
 
-
-const Index = () => {
+const Index = ( { children }) => {
 const {data: session, status} = useSession();
 
 
@@ -15,14 +15,18 @@ const {data: session, status} = useSession();
     return (
       <>
         {console.log(session)}
-        <ToolkitLayout />     
-        
+        <ToolSideBar name={session.user.name} image={session.user.image}>  
+          {children}
+       </ToolSideBar>
       </>
     )
   } 
 }
 
 export default Index
+
+
+
 
 export const getServerSideProps =async(context) =>{
 
@@ -37,6 +41,8 @@ export const getServerSideProps =async(context) =>{
   }
   return {
     props: {session}
+
+    
   }
   
 

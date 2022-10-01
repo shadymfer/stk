@@ -62,6 +62,14 @@ function MyApp({ Component, pageProps,session }) {
       </WalletProvider>
   </ConnectionProvider>
  */
+
+  if(Component.getLayout){
+    return ( Component.getLayout(<SessionProvider session={session} ><Component {...pageProps} /> </SessionProvider>)
+  
+    )
+    
+  }
+
   return <>
 
           <SessionProvider session={session} >

@@ -1,12 +1,15 @@
+import { useSession } from "next-auth/react";
 import Head from "next/head";
 
 import ToolSideBar from "../toolkit/ToolSideBar";
 
 const ToolkitLayout = ({
     children,
-    justify = 'items-center',
-    ...divProps
+    
   }) => {
+
+    
+  const {data: session, status} = useSession();
     return (
       <>
        <Head>
@@ -16,9 +19,10 @@ const ToolkitLayout = ({
         </Head>
         <div className="bg-[#050A0F] h-screen w-screen text-white">
         
-        <ToolSideBar />
-        
-     
+        <ToolSideBar name={session.user.name} image={session.user.image}>
+        {children}
+         
+        </ToolSideBar> 
         </div>
       </>
     );
