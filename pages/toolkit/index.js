@@ -15,9 +15,12 @@ const {data: session, status} = useSession();
     return (
       <>
         {console.log(session)}
-        <ToolSideBar name={session.user.name} image={session.user.image}>  
+        <div className='flex'>
+        <ToolSideBar name={session.user.name} image={session.user.image} active={true}>  
           {children}
        </ToolSideBar>
+       <h1>HASDHASd</h1>
+       </div>
       </>
     )
   } 
@@ -25,7 +28,16 @@ const {data: session, status} = useSession();
 
 export default Index
 
-
+Index.getLayout = function IndexLayout(page) {
+ 
+  return(
+    <>
+   
+        {page}
+     
+    </>    
+  )
+}
 
 
 export const getServerSideProps =async(context) =>{

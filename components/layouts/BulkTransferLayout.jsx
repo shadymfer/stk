@@ -1,11 +1,12 @@
 import { useSession } from "next-auth/react";
 import Head from "next/head";
 import Header from "../toolkit/bulktransfer/header";
+import TransferTool from "../toolkit/bulktransfer/TransferTool";
 
 import ToolSideBar from "../toolkit/ToolSideBar";
 
 const BulkTransferLayout = ({
-    children,
+    children, isActive
     
   }) => {
 
@@ -18,12 +19,17 @@ const BulkTransferLayout = ({
         <meta name="description" content="Bulk Transfer Tool " />
         <link rel="icon" href="/favicon.ico" />
         </Head>
-        <div id='bulk' className="bg-[#050A0F] h-full w-full text-white">
         
-    <ToolSideBar name={session.user.name} image={session.user.image}>
+        <div id='bulk' className="bg-[#050A0F] flex h-screen justify-between text-white">
+          
+          <ToolSideBar name={session.user.name} image={session.user.image} active={isActive} menu={"BulkTransfer"} />
+          <div id='bulk-main' className="w-full"> 
+              <Header /> 
+              <TransferTool /> 
+          </div>
+         
 
-</ToolSideBar><main><Header></Header></main>
-       
+          
         </div>
       </>
     );

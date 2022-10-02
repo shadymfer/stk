@@ -64,7 +64,20 @@ function MyApp({ Component, pageProps,session }) {
  */
 
   if(Component.getLayout){
-    return ( Component.getLayout(<SessionProvider session={session} ><Component {...pageProps} /> </SessionProvider>)
+    return ( Component.getLayout(
+      <ConnectionProvider endpoint={endpoint}>
+        <WalletProvider wallets={wallets} autoConnect>
+          <WalletModalProvider>
+          <ToastContainer/>
+            <SessionProvider session={session} >
+              <Component {...pageProps} /> 
+            </SessionProvider>
+            </WalletModalProvider>
+        </WalletProvider>
+    </ConnectionProvider>
+            
+    )
+        
   
     )
     
@@ -72,9 +85,16 @@ function MyApp({ Component, pageProps,session }) {
 
   return <>
 
-          <SessionProvider session={session} >
-              <Component {...pageProps} />
-          </SessionProvider>
+<ConnectionProvider endpoint={endpoint}>
+        <WalletProvider wallets={wallets} autoConnect>
+          <WalletModalProvider>
+          <ToastContainer/>
+            <SessionProvider session={session} >
+              <Component {...pageProps} /> 
+            </SessionProvider>
+            </WalletModalProvider>
+        </WalletProvider>
+    </ConnectionProvider>
 
  
  

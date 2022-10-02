@@ -10,9 +10,8 @@ const bulktransfer = ({ children }) => {
   if(session){
     return (
       <>
-        <BulkTransferLayout>
+        <BulkTransferLayout isActive={true}/>
      
-       </BulkTransferLayout>
       </>
     )
   } 
