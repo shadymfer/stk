@@ -14,70 +14,16 @@ const approvedAccounts = ['Web3 Chibis in the Solana network. 3,333 chibified av
 
 const Header = () => {
 
-  const { publicKey, signTransaction, connected } = useWallet()
-  const { connection } = useConnection()
-  const [nfts, setNfts] = useState([])
-  const [sending, setSending] = useState([])
-  const [to, setTo] = useState('')
-  const [search, setSearch] = useState('')
-  const [loading, setLoading] = useState(false)
-  const [feedbackStatus, setFeedbackStatus] = useState("")
-  const [allowed, setAllowed] = useState(false)
 
-
-
-  const GET_NFTS = gql`
-  query GetNfts($owners: [PublicKey!], $limit: Int!, $offset: Int!) {
-    nfts(owners: $owners, limit: $limit, offset: $offset) {
-      address
-      mintAddress
-      name
-      description
-      image
-      owner {
-        address
-        associatedTokenAccountAddress
-      }
-    }
-  }
-`
-
-useMemo(() => {
-  if (publicKey?.toBase58()) {
-    client
-      .query({
-        query: GET_NFTS,
-        variables: {
-          owners: [publicKey?.toBase58()],
-          offset: 0,
-          limit: 10000
-        }
-      })
-      .then(res => setNfts(res.data.nfts))
-  } else {
-    setNfts([])
-    setSending([])
-    setTo('')
-  }
-}, [publicKey?.toBase58()])
-
-useMemo(()=>{
-  nfts.map((nft)=>{
-    if (approvedAccounts.includes(nft.description)){
-      console.log('approved')
-      setAllowed(true)
-    }
-  })
-}, [nfts])
 
 
   return (
  
-    <div id='toolheader' className='text-white flex flex-row w-full max-h-[70px] items-center justify-between m-5'>
+    <div id='toolheader' className='text-white flex flex-row  max-h-[70px] items-center justify-between m-20'>
       
       <h3>Bulk Transfer</h3>
       <WalletMultiButton /> 
-      
+
     </div>
     
  
