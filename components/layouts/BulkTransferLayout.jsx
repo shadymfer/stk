@@ -99,7 +99,7 @@ const BulkTransferLayout = ({
           
           <ToolSideBar name={session.user.name} image={session.user.image} active={isActive} menu={"BulkTransfer"} />
          
-              <div className="flex  flex-col  w-full p-2 my-5">
+              <div className="flex  flex-col w-full p-10 ">
                 <Header /> 
                 <div>
                   <TransferTool nfts={nfts}/> 

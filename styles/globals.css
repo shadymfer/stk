@@ -43,6 +43,10 @@ html{
 
 
 button{
-  @apply rounded-xl uppercase bg-[#eb920c] 
+  @apply rounded-xl  bg-[#eb920c] 
 }
 
+.bg-card-blue {
+  --tw-bg-opacity: 1;
+  background-color: hsl(216 50% 16% / var(--tw-bg-opacity));
+}

@@ -19,7 +19,7 @@ const Header = () => {
 
   return (
  
-    <div id='toolheader' className='text-white flex flex-row  max-h-[70px] items-center justify-between m-20'>
+    <div id='toolheader' className='text-white flex flex-row  max-h-[70px] items-center justify-between '>
       
       <h3>Bulk Transfer</h3>
       <WalletMultiButton /> 
