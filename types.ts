@@ -1,6 +1,6 @@
-export interface Owner {
-    address: string
-    associatedTokenAccountAddress: string
+export const Owner ={
+    address :'',
+    associatedTokenAccountAddress:''
   }
 
 export interface third {
@@ -8,24 +8,24 @@ export interface third {
   associatedTokenAccountAddress: string
 }
 
-  export interface thirdNft {
-    symbol: String
-    name: string
-    address: string
-    description: string
-    image: string
-    mintAddress: string
-    thirdowner: Owner
-    updateAuthority: string
-  }
+  export const  thirdNft = {
+    symbol:'',
+    name:'',
+    address:'',
+    description:'',
+    image:'',
+    mintAddress:'',
+    thirdowner: Owner,
+    updateAuthority:'',
+  } 
 
-  export interface Nft {
-    symbol: String
-    name: string
-    address: string
-    description: string
-    image: string
-    mintAddress: string
-    owner: Owner
-    updateAuthority: string
+  export const Nft= {
+    symbol:'',
+    name:'',
+    address:'',
+    description:'',
+    image:'',
+    mintAddress:'',
+    owner: Owner,
+    updateAuthority:''
   }

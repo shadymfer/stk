@@ -40,53 +40,11 @@ const BulkTransferLayout = ({
     const [allowed, setAllowed] = useState(false)
   
   
-  
-    const GET_NFTS = gql`
-    query GetNfts($owners: [PublicKey!], $limit: Int!, $offset: Int!) {
-      nfts(owners: $owners, limit: $limit, offset: $offset) {
-        address
-        mintAddress
-        name
-        description
-        image
-        owner {
-          address
-          associatedTokenAccountAddress
-        }
-      }
-    }
-  `
-  
-  useMemo(() => {
-    if (publicKey?.toBase58()) {
-      client
-        .query({
-          query: GET_NFTS,
-          variables: {
-            owners: [publicKey?.toBase58()],
-            offset: 0,
-            limit: 10000
-          }
-        })
-        .then(res => setNfts(res.data.nfts))
-    } else {
-      setNfts([])
-      setSending([])
-      setTo('')
-    }
-  }, [publicKey?.toBase58()])
-  
-  useMemo(()=>{
-    nfts.map((nft)=>{
-      if (approvedAccounts.includes(nft.description)){
-        console.log('approved')
-        setAllowed(true)
-      }
-    })
-  }, [nfts])
+ 
 
 
   const {data: session, status} = useSession();
+
     return (
       <>
        <Head>
@@ -102,7 +60,7 @@ const BulkTransferLayout = ({
               <div className="flex  flex-col w-full p-10 ">
                 <Header /> 
                 <div>
-                  <TransferTool nfts={nfts}/> 
+                  <TransferTool /> 
                 </div> 
               </div>
           
