@@ -6,6 +6,7 @@ import { WalletDisconnectButton, WalletMultiButton, useWalletModal } from '@sola
 
 import { FaDiscord, FaFacebook, FaFacebookF, FaGithub, FaTwitter, FaYoutube } from 'react-icons/fa'
 import Arc from '../../public/assets/logo.png'
+import { BsGlobe2 } from 'react-icons/bs';
 const NavBar2 = () => {
 
   const [nav, setNav] = useState(false)
@@ -28,73 +29,97 @@ const NavBar2 = () => {
 
  
 
-  return (
+  return ( <>
     <div className={
       shadow
-        ? 'fixed w-full h-20 bg-black/30 z-[100] ease-in-out duration-300'
-        : 'fixed w-full h-20 z-[100]'
+        ? 'fixed w-full h-20 bg-black/40 z-[100] ease-in-out duration-300 flex items-center justify-center gap-20 text-lg '
+        : 'fixed w-full h-20 z-[100] '
     }>
        
-      <div className='flex flex-row items-center justify-center w-full h-full  2xl:px-40   '> 
-      <div className='mr-[100px] ml-4 md:mr-[800px]'> 
-        <Image  src={Arc} width={70} height={70} alt=''/></div>
-        <a className='hidden md:flex uppercase hover:border-b font-bold text-white mr-5' href="/" target="_blank" rel='noreferrer'>Home</a>
-        <div className="group inline-block relative">
-              <ul className='hidden md:flex font-bold text-white justify-center items-center  '>
-                  <div className="p-4">
-                    <div className=" relative">
-                    <Link className="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="/toolkit">  Shadies Toolkit</Link>
-                        
-                    </div>
-                  </div>
-                
-              </ul>
-              <div onClick={handleNav} className='md:hidden text-white items-center'>
-                  <AiOutlineMenu size={25} />
+      <div className='flex items-center justify-center gap-20 text-lg my-5'>
+        <div className='mr-48 md:mr-96 hover:scale-110 hover:ease-in-out hover:duration-300'>
+                <Link href="/" >
+                  <Image className='cursor-pointer' src={Arc} width={70} height={70} alt=''/>
+                </Link>
               </div>
-          </div>
-          <a className='hidden md:flex ml-1 uppercase hover:border-b font-bold text-white ' href="https://magiceden.io/marketplace/tshc" target="_blank" rel="noreferrer">MagicEden✨</a>
-                  
-                  <WalletMultiButton className='m-5'/>
-                  
-      </div>
+              
+              <div className='text-white hidden md:contents hover:font-bold hover:ease-in-out hover:duration-300 hover:underline '>
+                <Link className=" cursor-pointer " href="/toolkit"> Shadies Toolkit</Link> 
+              </div>
+              
+              <a className='hidden md:contents  hover:font-bold hover:ease-in-out hover:duration-300 hover:underline  text-white ' href="https://magiceden.io/marketplace/tshc" target="_blank" rel="noreferrer">MagicEden✨</a>
+              
+              <div className='text-white hidden md:contents hover:font-bold hover:ease-in-out hover:duration-300 hover:underline '>
+                <Link className=" cursor-pointer " href="/#team"> The Team</Link> 
+              </div>
 
+              <div onClick={handleNav} className='md:hidden text-white cursor-pointer'>
+                        <AiOutlineMenu size={25} />
+        </div>   
+      </div>
       <div className={nav ? 'md:hidden fixed left-0 top-0 w-full h-screen bg-black/70' : ''}>
             <div className={
                 nav 
-                ? 'fixed left-0 top-0 w-[75%] sm:w=[60%] md:w-[45%] h-screen bg-[#ecf0f3] text-[#333333] p-10 eas-in duration-500' 
-                : 'fixed left-[-100%] top-0 eas-in duration-500'}>
+                ? 'fixed left-0 top-0 w-[75%] sm:w-[60%] md:w-[45%] h-screen bg-[#09111a] text-zinc-300 p-10 ease-in duration-300' 
+                : 'fixed left-[-120%] top-0 ease-in duration-300 '}>
                 <div>
-                    <div className='flex w-full items-center justify-between'>
-                    <Link href=''> 
-                    <Image onClick={()=> setNav(false)} className='cursor-pointer' src={Arc} alt='/' width='50' height='50'/>
+                    <div className='flex w-full items-center justify-between cursor-pointer '>
                     
-                     </Link>
-                        <div onClick={handleNav} className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer'>
-                            <AiOutlineClose/>
+                    <Image onClick={()=> setNav(false)} className='cursor-pointer ' src={Arc} alt='/' width='50' height='50'/>
+                    
+                    
+                        <div className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer'>
+                            <AiOutlineClose  onClick={()=> setNav(false)}/>
                             
                         </div>
                     </div>
-                    <h1>The Shady Class NFT</h1>
+                    <h1 className='mt-4'>The Shady Class NFT</h1>
                     <div className='border-b border-gray-300'>
                         
                         <p className='w-[85%] md:w-[90%]'>Web3 Chibis in the Solana network</p>
                     </div>
                 </div>
                 <div className='py-4 flex flex-col'>
-                    <ul className='uppercase '>
-                        <li  onClick={()=> setNav(false)} className='py-4 text-sm '><a className="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="#">TRADING SUITE 🤖 (COMING SOON)</a></li>
-                        <li onClick={()=> setNav(false)} className='py-4 text-sm'><a className="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="#">VAULT 🔐 (COMING SOON)</a></li>
-                        <li  onClick={()=> setNav(false)}className='py-4 text-sm'><Link className="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="/toolkit">BULK TRANSFER ⚡</Link></li>
-                        <li  onClick={()=> setNav(false)}className='py-4 text-sm'><a className="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="https://staking.theshadyclass.xyz/">STAKING 💰</a></li>
-                        <li onClick={()=> setNav(false)}className='py-4 text-sm' ><a className="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="https://collector.theshadyclass.xyz/">COLLECTOR 🔱</a> </li>
+                    <ul className='uppercase px-2'>
+                        <li  onClick={()=> setNav(false)} className='px-2 py-4 text-sm hover:bg-[#0f1e36]  hover:font-bold hover:ease-in-out hover:duration-300 hover:underline hover:rounded-lg '><Link className=" py-2 px-4 block whitespace-no-wrap" href="/toolkit">Shadies Toolkit ⚡</Link></li>
+                        <li onClick={()=> setNav(false)} className='px-2 py-4 text-sm hover:bg-[#0f1e36]  hover:font-bold hover:ease-in-out hover:duration-300 hover:underline hover:rounded-lg '><a className=' text-white ' href="https://magiceden.io/marketplace/tshc" target="_blank" rel="noreferrer">MagicEden✨</a></li>
+                        <li  onClick={()=> setNav(false)}className='px-2 py-4 text-sm hover:bg-[#0f1e36] hover:font-bold hover:ease-in-out hover:duration-300 hover:underline hover:rounded-lg '><Link className="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="/#team">The Team</Link></li>
+                        
                     </ul>
+                    <div className='pt-40'>
+                        <p className='uppercase tracking-wide text-white'>In the Shadows We Build </p>
+                        <div className='flex items-center justify-between my-4 w-full sm:w-[80%]'>
+                            <div className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-110 ease-in duration-200'>
+                            <a href="https://twitter.com/shadies_NFT"><FaTwitter /></a>
+                            </div>
+                            <div className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-110 ease-in duration-200'>
+                            <a href="https://www.discord.gg/qMUrjqAjUJ"><FaDiscord /> </a>
+                            </div>
+                            <div className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-110 ease-in duration-200'>
+                            <a href="https://utility.theshadyclass.xyz/">< BsGlobe2/></a>
+                            </div>
+                            
+                        </div>
+                    </div>
                     
                 </div>
             </div>
         </div>
+        
+     
+        
+     
+            
+          
     </div>
-  )
+      
+    
+                
+     
+
+
+      </>
+ )
 }
 
 export default NavBar2
