@@ -6,7 +6,7 @@ import { FaDiscord } from 'react-icons/fa'
 import { BiTransfer } from 'react-icons/bi'
 import { RiHandCoinLine } from 'react-icons/ri'
 import { BsSafe2 } from 'react-icons/bs'
-import { GiTargetShot } from 'react-icons/gi'
+import { GiAbstract092, GiTargetShot } from 'react-icons/gi'
 
 
 import transferImg from '../../public/assets/favicon.ico'
@@ -53,56 +53,74 @@ const ToolSideBar = ({name, image, active, menu}) => {
 
       <div id='nav' className='mt-10'>
 
-      <Link href='/toolkit/bulktransfer'> 
-        <button  
-        onClick={()=>{setIsActive(true) 
-          setMenuItem("BulkTransfer")  
-        }}  
+        <Link href='/toolkit/'> 
+          <button onClick={()=> {setIsActive(true) 
+            setMenuItem("Staking")  
+        }} className={
+          (isActive && menuItem==="TradingSuite")
+          ? 'text-white flex flex-row justify-start items-center rounded-md  bg-transparent h-[50px] w-64 text-left mb-4 pl-8 gap-4 bg-red-700'
+          : 'text-white flex flex-row justify-start items-center rounded-md  bg-transparent h-[50px] w-64 text-left mb-4 pl-8 gap-4 hover:shadow-[inset_20rem_0_0_0] hover:shadow-rose-800 duration-[200ms,400ms] transition-[color,box-shadow]'
+          }> 
+                      <GiAbstract092 className='rounded-full border border-gray-100 text-xl'> </GiAbstract092> <p className=''>Staking</p>
+          </button>
+          </Link>
+
+        <Link href='/toolkit/bulktransfer'> 
+          <button  
+          onClick={()=>{setIsActive(true) 
+            setMenuItem("BulkTransfer")  
+          }}  
+          className={
+          (isActive && menuItem==="BulkTransfer")
+          ? 'text-white flex flex-row justify-start items-center rounded-md  bg-transparent h-[50px] w-64 text-left mb-4 pl-8 gap-4 bg-[#0f1e36]'
+          : 'text-white flex flex-row justify-start items-center rounded-md  bg-transparent h-[50px] w-64 text-left mb-4 pl-8 gap-4 hover:shadow-[inset_20rem_0_0_0] hover:shadow-rose-800 duration-[200ms,400ms] transition-[color,box-shadow]'
+          }> 
+          <BiTransfer className='rounded-full border border-gray-100 text-xl'  /> <p className=''>Bulk Transfer</p>
+          </button>
+          </Link> 
+
+          <Link href='/toolkit/'> 
+          <button 
+          onClick={()=> {setIsActive(true) 
+            setMenuItem("TheCollector")  
+        }} 
         className={
-        (isActive && menuItem==="BulkTransfer")
-        ? 'text-white flex flex-row justify-start items-center rounded-md  bg-transparent h-[50px] w-64 text-left mb-4 pl-8 gap-4 bg-[#0f1e36]'
-        : 'text-white flex flex-row justify-start items-center rounded-md  bg-transparent h-[50px] w-64 text-left mb-4 pl-8 gap-4 hover:shadow-[inset_20rem_0_0_0] hover:shadow-rose-800 duration-[200ms,400ms] transition-[color,box-shadow]'
-        }> 
-        <BiTransfer className='rounded-full border border-gray-100 text-xl'  /> <p className=''>Bulk Transfer</p>
-        </button>
-        </Link> 
+          (isActive && menuItem==="TheCollector")
+          ? 'text-white flex flex-row justify-start items-center rounded-md  bg-transparent h-[50px] w-64 text-left mb-4 pl-8 gap-4 bg-red-700'
+          : 'text-white flex flex-row justify-start items-center rounded-md  bg-transparent h-[50px] w-64 text-left mb-4 pl-8 gap-4 hover:shadow-[inset_20rem_0_0_0] hover:shadow-rose-800 duration-[200ms,400ms] transition-[color,box-shadow]'
+          }>  
+                      <RiHandCoinLine className='rounded-full border border-gray-100 text-xl'> </RiHandCoinLine> <p className=''>The Collector</p>
+          </button>
+          </Link>
 
-        <button 
-        onClick={()=> {setIsActive(true) 
-          setMenuItem("TheCollector")  
-       }} 
-       className={
-        (isActive && menuItem==="TheCollector")
-        ? 'text-white flex flex-row justify-start items-center rounded-md  bg-transparent h-[50px] w-64 text-left mb-4 pl-8 gap-4 bg-red-700'
-        : 'text-white flex flex-row justify-start items-center rounded-md  bg-transparent h-[50px] w-64 text-left mb-4 pl-8 gap-4 hover:shadow-[inset_20rem_0_0_0] hover:shadow-rose-800 duration-[200ms,400ms] transition-[color,box-shadow]'
-        }>  
-                    <RiHandCoinLine className='rounded-full border border-gray-100 text-xl'> </RiHandCoinLine> <p className=''>The Collector</p>
-        </button>
-        
-        <button onClick={()=> {setIsActive(true) 
-          setMenuItem("TheVault")  
-      }} className={
-        (isActive && menuItem==="TheVault")
-        ? 'text-white flex flex-row justify-start items-center rounded-md  bg-transparent h-[50px] w-64 text-left mb-4 pl-8 gap-4 bg-red-700'
-        : 'text-white flex flex-row justify-start items-center rounded-md  bg-transparent h-[50px] w-64 text-left mb-4 pl-8 gap-4 hover:shadow-[inset_20rem_0_0_0] hover:shadow-rose-800 duration-[200ms,400ms] transition-[color,box-shadow]'
-        }> 
-                    <BsSafe2 className='rounded-full border border-gray-100 text-xl'> </BsSafe2> <p className=''>The Vault</p>
-        </button>
+          <Link href='/toolkit/'> 
+          <button onClick={()=> {setIsActive(true) 
+            setMenuItem("TheVault")  
+        }} className={
+          (isActive && menuItem==="TheVault")
+          ? 'text-white flex flex-row justify-start items-center rounded-md  bg-transparent h-[50px] w-64 text-left mb-4 pl-8 gap-4 bg-red-700'
+          : 'text-white flex flex-row justify-start items-center rounded-md  bg-transparent h-[50px] w-64 text-left mb-4 pl-8 gap-4 hover:shadow-[inset_20rem_0_0_0] hover:shadow-rose-800 duration-[200ms,400ms] transition-[color,box-shadow]'
+          }> 
+                      <BsSafe2 className='rounded-full border border-gray-100 text-xl'> </BsSafe2> <p className=''>The Vault</p>
+          </button>
+          </Link>
 
-        <button onClick={()=> {setIsActive(true) 
-          setMenuItem("TradingSuite")  
-      }} className={
-        (isActive && menuItem==="TradingSuite")
-        ? 'text-white flex flex-row justify-start items-center rounded-md  bg-transparent h-[50px] w-64 text-left mb-4 pl-8 gap-4 bg-red-700'
-        : 'text-white flex flex-row justify-start items-center rounded-md  bg-transparent h-[50px] w-64 text-left mb-4 pl-8 gap-4 hover:shadow-[inset_20rem_0_0_0] hover:shadow-rose-800 duration-[200ms,400ms] transition-[color,box-shadow]'
-        }> 
-                    <GiTargetShot className='rounded-full border border-gray-100 text-xl'> </GiTargetShot> <p className=''>Trading Suite</p>
-        </button>
+          <Link href='/toolkit/'> 
+          <button onClick={()=> {setIsActive(true) 
+            setMenuItem("TradingSuite")  
+        }} className={
+          (isActive && menuItem==="TradingSuite")
+          ? 'text-white flex flex-row justify-start items-center rounded-md  bg-transparent h-[50px] w-64 text-left mb-4 pl-8 gap-4 bg-red-700'
+          : 'text-white flex flex-row justify-start items-center rounded-md  bg-transparent h-[50px] w-64 text-left mb-4 pl-8 gap-4 hover:shadow-[inset_20rem_0_0_0] hover:shadow-rose-800 duration-[200ms,400ms] transition-[color,box-shadow]'
+          }> 
+                      <GiTargetShot className='rounded-full border border-gray-100 text-xl'> </GiTargetShot> <p className=''>Trading Suite</p>
+          </button>
+          </Link>
         
       </div>
 
       
-      <div id='footer' className='mt-80 py-10'>
+      <div id='footer' className='mt-80'>
 
           <p className='text-xl gap-2 h-full flex flex-row justify-center items-center'> 
           <Image src={transferImg} width={40} height={40} className=''></Image> 
