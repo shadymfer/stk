@@ -34,6 +34,7 @@ const approvedAccounts = ['Web3 Chibis in the Solana network. 3,333 chibified av
 const TransferTool = () => {
     const { publicKey, signTransaction, connected } = useWallet()	
     const [selected,setSelected] = useState(false)
+    const [search, setSearch] = useState('')	
     const [nfts, setNfts] = useState([])	
     const [feedbackStatus, setFeedbackStatus] = useState("")
     const [allowed, setAllowed] = useState(false)
@@ -114,6 +115,7 @@ const TransferTool = () => {
                     <div className='ml-10 flex flex-col items-center'>
                     <h2>X/100</h2>
                     <p>items Selected</p>
+                    <input type="text" class="rounded text-slate-800" placeholder='Search NFTs' onChange={e => setSearch(e.target.value)} />
                     </div>
                 </div>
 
@@ -131,24 +133,23 @@ const TransferTool = () => {
                   <div className='lg:mx-10 mt-5  grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 items-center justify-items-center gap-20 '>
 
                   {nfts
-                  .filter(n => n.name.toLowerCase())
-                  .sort ((a, b) => {
-                    if (a.name > b.name) return 1;
-                    else if (a.name < b.name) return -1;
-                    else return 0;
-                  })
-                  .map(n => (
+                    .filter(n => n.name.toLowerCase().includes(search.toLowerCase()))
+                    .sort ((a, b) => {
+                      if (a.name > b.name) return 1;
+                      else if (a.name < b.name) return -1;
+                      else return 0;
+                    })
+                    .map(n => (
                 
-                  <Cards 
-                      key={Math.random()}
-                      name={n.name} 
-                      image={n.image} 
-                      isSelected={selected}
-
-                  >
-
-                  </Cards>
-                  ))}
+                      <Cards 
+                          key={Math.random()}
+                          name={n.name} 
+                          image={n.image} 
+                          isSelected={selected}
+                      />
+                  
+                    ))
+                  }
                       
                   
                   </div>
