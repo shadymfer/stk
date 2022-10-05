@@ -19,6 +19,8 @@ import {Nft} from '../../../types'
 import client from '../../../client'
 import * as ga from '../../../lib/ga'
 
+//@ts-ignore
+import { createAssociatedTokenAccountInstruction, getAssociatedTokenAddress, TOKEN_PROGRAM_ID, ASSOCIATED_TOKEN_PROGRAM_ID, createTransferInstruction} from '@solana/spl-token'
 
 //solana stuff
 import { useConnection, useWallet } from '@solana/wallet-adapter-react'
@@ -33,12 +35,149 @@ const approvedAccounts = ['Web3 Chibis in the Solana network. 3,333 chibified av
 
 const TransferTool = () => {
     const { publicKey, signTransaction, connected } = useWallet()	
+    const { connection } = useConnection()	
     const [selected,setSelected] = useState(false)
     const [search, setSearch] = useState('')	
     const [nfts, setNfts] = useState([])	
+    const [sending, setSending] = useState([])	
+    const [to, setTo] = useState('')	
+    const [loading, setLoading] = useState(false)	
     const [feedbackStatus, setFeedbackStatus] = useState("")
     const [allowed, setAllowed] = useState(false)
+
+    const massSend = async (list, to) => {	
+      console.log("Sending: ", list , "\n To: ", to)
+
+      setLoading(true)	
+  
+      if (to == '') {
+        toast.error('no dest')
+        setLoading(false)
+        setFeedbackStatus("🤦‍♂️ NO RECEIVER SER, YOU DUMMY...")
+  
+        return{
+          feedbackStatus,
+        }
+      } else {
+        try {
+          console.log('to: ', to)
+          new PublicKey(to)
+          console.log('valid dest address: ', to)
+        } catch (e) {
+          console.log('Invalid address')
+          setTo('')
+          setLoading(false)
+          setFeedbackStatus("🤦‍♂️ Wrong address ser.. Fool of a took.")
+  
+          return{
+            feedbackStatus,
+          }
+        }
+      }
+  
+      if (!list || !connection || !publicKey || !signTransaction) {
+        console.log('returning')
+        setLoading(false)
+        setFeedbackStatus("🤦‍♂️ NO SIG SER..")
+        return{
+          feedbackStatus,
+        }
+      }
+      if (!list.length) {	
+        console.log('probably want to select some nfts')	
+        setLoading(false)	
+        return	
+      }	
+      setFeedbackStatus(`Processing ${list.length} send request..`)	
+      setFeedbackStatus(`✍️ Sending in ${Math.ceil(list.length / 7)} packages..`)	
+      
+      for (var i = 0; i < list.length / 8; i++) {	
+        const tx = new Transaction()	
+        for (var j = 0; j < 7; j++) {	
+          if (list[i * 7 + j]) {	
+            const mintPublicKey = new PublicKey(list[i * 7 + j].mintAddress)	
+            const fromTokenAccount = await getAssociatedTokenAddress(	
+              mintPublicKey,	
+              publicKey	
+            )	
+            const fromPublicKey = publicKey	
+            const destPublicKey = new PublicKey(to)	
+            const destTokenAccount = await getAssociatedTokenAddress(	
+              mintPublicKey,	
+              destPublicKey	
+            )	
+            const receiverAccount = await connection.getAccountInfo(	
+              destTokenAccount	
+            )	
+            if (receiverAccount === null) {	
+              tx.add(	
+                createAssociatedTokenAccountInstruction(	
+                  fromPublicKey,	
+                  destTokenAccount,	
+                  destPublicKey,	
+                  mintPublicKey,	
+                  TOKEN_PROGRAM_ID,	
+                  ASSOCIATED_TOKEN_PROGRAM_ID	
+                )	
+              )	
+            }	
+            tx.add(	
+              createTransferInstruction(	
+                fromTokenAccount,	
+                destTokenAccount,	
+                fromPublicKey,	
+                1	
+              )	
+            )	
+          }	
+        }	
+        tx.recentBlockhash = (await connection.getLatestBlockhash()).blockhash	
+        tx.feePayer = publicKey	
+        // setFeedbackStatus("✍️ SIGN yer Phantom ser..")
+  
+        let signed = undefined	
+        try {	
+          signed = await signTransaction(tx)	
+        } catch (e) {	
+          toast(e.message)	
+          setLoading(false)	
+          return	
+        }	
+        let signature = undefined	
+        try {	
+          signature = await connection.sendRawTransaction(signed.serialize())	
+          await connection.confirmTransaction(signature, 'confirmed')	
+          toast.success('Transaction successful')	
+          {/*ga.event({	
+            action: 'multisend_success',	
+            params: { count: sending.length }	
+          })*/	}
+          sending.map(n => {	
+            setNfts(nfts.filter(n => !sending.includes(n)))	
+            setFeedbackStatus("🤝 SUCCESS SER! If BULK packaged, wait for all of it to finish.")
+          })	
+        } catch (e) {	
+          setFeedbackStatus("😒 IT ERROR'D SER. Try again.")
+          toast.error(e.message)	
+          setLoading(false)	
+         {/* ga.event({	
+            action: 'multisend_error',	
+            params: { msg: e.message }	
+          })*/	}
+  
+        }	
+      }	
+      setSending([])	
+      console.log('after success: ', sending)
+      setLoading(false)	
+  
+      return{
+        feedbackStatus,
+      }
+    } 
     
+
+
     const GET_NFTS = gql`
     query GetNfts($owners: [PublicKey!], $limit: Int!, $offset: Int!) {
       nfts(owners: $owners, limit: $limit, offset: $offset) {
@@ -69,8 +208,8 @@ const TransferTool = () => {
         .then(res => setNfts(res.data.nfts))
     } else {
       setNfts([])
-     // setSending([])
-      //setTo('')
+     setSending([])
+      setTo('')
     }
   }, [publicKey?.toBase58()])
 
@@ -83,6 +222,7 @@ const TransferTool = () => {
     })
   }, [nfts])
 
+  
 
 
   return (
@@ -113,15 +253,25 @@ const TransferTool = () => {
             <div className='flex justify-between'>
                 <div id='counter'>
                     <div className='ml-10 flex flex-col items-center'>
-                    <h2>X/100</h2>
-                    <p>items Selected</p>
-                    <input type="text" class="rounded text-slate-800" placeholder='Search NFTs' onChange={e => setSearch(e.target.value)} />
+                    <h2>{sending.length}/{nfts.length} selected</h2> 
+                    
+                    <input type="text" className="mt-2 rounded text-slate-800" placeholder='Search NFTs' onChange={e => setSearch(e.target.value)} />
                     </div>
                 </div>
 
-                <div id='transferTo' className='flex flex-col mr-5 gap-2'>
-                    <input type="text" class="rounded text-slate-800" />
-                    <button className='text-white flex flex-row  justify-center items-center rounded-md uppercase bg-gradient-to-r from-[#c31432] to-[#240b36] w-64 text-center h-12'> 
+                <div id='transferTo' className='flex flex-col mr-5 gap-2' >
+                    <input type="text" className="rounded text-slate-800" placeholder='Enter Receiver Address'
+                    onChange={e => {
+                      setTo(e.target.value)
+                    }} />
+                    <button 
+                    loading={loading}
+                    className='text-white flex flex-row  justify-center items-center rounded-md uppercase bg-gradient-to-r from-[#c31432] to-[#240b36] w-64 text-center h-12'
+                    onClick={() => {
+                      // setLoading(true)
+                      massSend(sending, to)
+                      // setLoading(false)
+                    }}> 
                         <BiTransfer className='mr-2'> </BiTransfer><p className='font-bold'>Transfer items</p> 
                     </button> 
                 </div>
@@ -146,6 +296,17 @@ const TransferTool = () => {
                           name={n.name} 
                           image={n.image} 
                           isSelected={selected}
+                          mintAddress={n.mintAddress}
+                          unselect={() => {
+                            setSending(sending.filter(item => item !== n))
+                            console.log('Unselect\n', sending)
+                          }}
+                          select={() => {
+                            setSending([...sending, n])
+                            console.log('Selected: \n', sending)
+                            
+                          }}
+                          selected={sending.includes(n)}
                       />
                   
                     ))
