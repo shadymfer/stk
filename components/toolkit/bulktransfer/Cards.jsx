@@ -37,7 +37,7 @@ const Cards = ({name, image, unselect,select,selected}, isSelected) => {
        <div className={
           (selected ? 'bg-red-700' : 'hidden')
        }>
-        <p>NFTs Selected</p>
+        <p>NFT Selected</p>
         </div> 
         </button>
     </div>

@@ -12,16 +12,16 @@ import Link from 'next/link';
 
 const approvedAccounts = ['Web3 Chibis in the Solana network. 3,333 chibified avatars ready to take on the metaverse and save the decentralization movement. The Shady Class is the OG NFT Collection under under W3B Industries.']
 
-const Header = () => {
+const Header = ({title}) => {
 
 
 
 
   return (
  
-    <div id='toolheader' className='text-white flex flex-row  max-h-[70px] items-center justify-between '>
+    <div id='toolheader' className='text-white flex flex-row max-h-[70px] items-center justify-between '>
       
-      <h3>Bulk Transfer</h3>
+      <h2>{title}</h2>
       <WalletMultiButton /> 
 
     </div>

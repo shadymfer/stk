@@ -1,22 +1,21 @@
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import { getSession, useSession } from "next-auth/react";
 import React from "react";
-import BulkTransferLayout from "../../components/layouts/BulkTransferLayout";
-import ToolkitLayout from "../../components/layouts/ToolkitLayout";
+import TheCollectorLayout from "../../components/layouts/TheCollectorLayout";
 
-const bulktransfer = ({ children }) => {
+const thecollector = ({ children }) => {
   const { data: session, status } = useSession();
 
   if (session) {
     return (
       <>
-        <BulkTransferLayout isActive={true} />
+        <TheCollectorLayout isActive={true} />
       </>
     );
   }
 };
 
-export default bulktransfer;
+export default thecollector;
 
 export const getServerSideProps = async (context) => {
   const session = await getSession(context);
@@ -32,6 +31,6 @@ export const getServerSideProps = async (context) => {
   };
 };
 
-bulktransfer.getLayout = function BulkTransferLayout(page) {
+thecollector.getLayout = function TheCollectorLayout(page) {
   return <>{page}</>;
 };

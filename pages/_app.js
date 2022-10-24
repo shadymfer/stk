@@ -25,6 +25,7 @@ import '../styles/globals.css'
 require('@solana/wallet-adapter-react-ui/styles.css');
 
 import {SessionProvider} from 'next-auth/react'
+import { TokenRegistryContextProvider } from '../contexts';
 
 function MyApp({ Component, pageProps,session }) {
 
@@ -70,7 +71,9 @@ function MyApp({ Component, pageProps,session }) {
           <WalletModalProvider>
           <ToastContainer/>
             <SessionProvider session={session} >
-              <Component {...pageProps} /> 
+             
+                <Component {...pageProps} />
+             
             </SessionProvider>
             </WalletModalProvider>
         </WalletProvider>
