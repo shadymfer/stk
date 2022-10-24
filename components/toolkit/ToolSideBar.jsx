@@ -2,10 +2,10 @@ import { signOut, useSession } from 'next-auth/react'
 import Image from 'next/image';
 
 import React, { useEffect, useState } from 'react'
-import { FaDiscord } from 'react-icons/fa'
+import { FaDiscord, FaTwitter } from 'react-icons/fa'
 import { BiTransfer } from 'react-icons/bi'
 import { RiHandCoinLine } from 'react-icons/ri'
-import { BsSafe2 } from 'react-icons/bs'
+import { BsGlobe2, BsSafe2 } from 'react-icons/bs'
 import { GiAbstract092, GiTargetShot } from 'react-icons/gi'
 
 
@@ -79,7 +79,7 @@ const ToolSideBar = ({name, image, active, menu}) => {
           </button>
           </Link> 
 
-          <Link href='/toolkit/'> 
+          <Link href='/toolkit/thecollector'> 
           <button 
           onClick={()=> {setIsActive(true) 
             setMenuItem("TheCollector")  
@@ -120,14 +120,25 @@ const ToolSideBar = ({name, image, active, menu}) => {
       </div>
 
       
-      <div id='footer' className='mt-80'>
+      <div id='footer' className='mt-40'>
 
           <p className='text-xl gap-2 h-full flex flex-row justify-center items-center'> 
           <Image src={transferImg} width={40} height={40} className=''></Image> 
           Shadies Toolkit
          </p>
-         <Image src={transferImg} width={40} height={40} className=''></Image> 
-        </div>
+         <div className='flex items-center justify-between w-full px-4'>
+                            <div className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-110 ease-in duration-200'>
+                            <a href="https://twitter.com/shadies_NFT"><FaTwitter /></a>
+                            </div>
+                            <div className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-110 ease-in duration-200'>
+                            <a href="https://www.discord.gg/qMUrjqAjUJ"><FaDiscord /> </a>
+                            </div>
+                            <div className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-110 ease-in duration-200'>
+                            <a href="https://utility.theshadyclass.xyz/">< BsGlobe2/></a>
+                            </div>
+                            
+          </div> 
+      </div>
     </div>
     </aside>
    
